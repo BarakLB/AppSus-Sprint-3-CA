@@ -51,9 +51,9 @@ export class MailList extends React.Component {
         if (!this.state.mails.length) return <Loader/>
         return (
             <section>
-                <MailFilter /> 
                 <MailFolderList  />
                 <div className="mails-container">
+                <MailFilter /> 
                     {mails.map((mail) => {
                         return <MailPreview key={mail.id} mail={mail} />
                     })}
