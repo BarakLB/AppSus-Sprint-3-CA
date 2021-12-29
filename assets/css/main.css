@@ -1,7 +1,7 @@
 
 /* BASICS */
+@import "./parts/base.css";
 @import "./parts/helpers.css";
-
 /* PAGES */
 @import "./pages/home.css";
 
@@ -12,6 +12,9 @@
 @import './apps/keep/cmps/note-preview.css';
 
 /* MAIL APP */
+/* PAGES */
+@import './apps/mail/pages/mail-compose.css';
+/* COMPONENTS  */
 @import './apps/mail/cmps/mail-filter.css';
 @import './apps/mail/cmps/mail-preview.css';
 
