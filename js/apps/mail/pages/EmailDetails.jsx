@@ -1,5 +1,6 @@
 import { mailService } from '../services/mail.service.js'
 import { utilService } from '../../../services/util.service.js'
+import {Loader} from '../../../cmps/Loader.jsx'
 
 export class EmailDetails extends React.Component {
     state = {
@@ -23,8 +24,7 @@ export class EmailDetails extends React.Component {
 
     render() {
         const { mail } = this.state
-        console.log('here', mail)
-        if (!mail) return <p>No Mail</p>
+        if (!mail) return <Loader/>
         return <section className="mail-preview">
             <h3>Sent At: {utilService.handleTimestamp(mail.sentAt)}</h3>
             <h4>From: {mail.nickname}, {mail.from}</h4>

@@ -5,7 +5,8 @@ const { Link } = ReactRouterDOM
 
 
 export function MailPreview({ mail }) {
-    console.log('mail:', mail)
+    mail.isRead = true
+    console.log('sadasdasd',mail)
     return <section className="flex">
         <Link className="clean-link" to={`mail/edit/${mail.id}`}>
             <div className="sender-name">
