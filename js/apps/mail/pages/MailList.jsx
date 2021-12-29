@@ -1,6 +1,8 @@
 //SERVICES
 import { mailService } from '../services/mail.service.js';
 
+//PAGES
+import {MailCompose} from './MailCompose.jsx'
 
 //CMPS
 import { MailPreview } from '../cmps/MailPreview.jsx';
@@ -51,9 +53,10 @@ export class MailList extends React.Component {
         if (!this.state.mails.length) return <Loader/>
         return (
             <section>
+                {/* <MailCompose /> */}
                 <MailFilter /> 
-                <MailFolderList  />
                 <div className="mails-container">
+                <MailFolderList  />
                     {mails.map((mail) => {
                         return <MailPreview key={mail.id} mail={mail} />
                     })}

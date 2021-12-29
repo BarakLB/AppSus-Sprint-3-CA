@@ -1,12 +1,13 @@
-const { NavLink } = ReactRouterDOM;
+const { NavLink, Link } = ReactRouterDOM;
 
 export class MailFolderList extends React.Component {
 
 
     render() {
         return <section className="mail-side-nav">
-            <ul className="clean-list">
+<Link className="compose-btn clean-link" to="/mail/new"><i className="fas fa-plus"></i>New mail</Link> 
 
+            <ul className="clean-list">
                 <li>
                     <NavLink className="clean-link" to="/mail/inbox">
                     <i className="fas fa-box-open"></i>Inbox</NavLink>
