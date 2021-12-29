@@ -8,6 +8,9 @@
 /* COMPONENTS  */
 @import "./cmps/app-header.css";
 
+/* KEEP APP */
+@import './apps/keep/cmps/note-preview.css';
+
 .main-header {
     display: flex;
 }

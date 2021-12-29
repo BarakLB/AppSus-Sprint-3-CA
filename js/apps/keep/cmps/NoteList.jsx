@@ -1,3 +1,5 @@
+import { NotePreview } from './NotePreview.jsx';
+
 export function NoteList({ notes }) {
   return (
     <section className="note-list">

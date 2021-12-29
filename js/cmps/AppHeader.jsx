@@ -10,7 +10,8 @@ export class AppHeader extends React.Component {
         <nav className="navbar">
             <NavLink className="clean-link" exact to="/">  Home</NavLink>
             <NavLink className="clean-link" to="/mail">  Email </NavLink>
-            <NavLink className="clean-link" to="/">  About </NavLink>
+            <NavLink className="clean-link" to="/note">  Notes </NavLink>
+            <NavLink className="clean-link" to="/about">  About </NavLink>
         </nav>
       
     </header>
