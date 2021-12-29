@@ -1,9 +1,13 @@
 import { noteService } from './services/note.service.js';
 import { NoteList } from './cmps/NoteList.jsx'
+import { NoteFilter } from './cmps/NoteFilter.jsx';
 
 export class NoteApp extends React.Component {
   state = {
     notes: [],
+    filterBy: {
+      type: 'all',
+    }
   };
 
   componentDidMount() {
@@ -16,6 +20,16 @@ export class NoteApp extends React.Component {
     });
   };
 
+  onAddNote = (note, callback) => {
+    NoteService.addNote(note).then(() => {
+        this.loadNotes()
+        callback && callback()
+    })
+}
+  onFilterChange = (filterBy) => {
+    this.setState({ filterBy }, () => this.loadNotes)
+  }
+
   render() {
     const { notes } = this.state;
     if (!this.state.notes.length)
@@ -23,6 +37,7 @@ export class NoteApp extends React.Component {
     console.log(notes);
     return (
       <section className="note-app">
+        <NoteFilter />
         <NoteList notes={notes} />
       </section>
     );
