@@ -25,9 +25,8 @@ function getUser() {
 }
 
 function getMailById(mailId) {
-  let mail = _loadMailsFromStorage();
-  mail.find((mail) => mail.id === mailId);
-  return Promise.resolve(mail);
+  let mails = _loadMailsFromStorage();
+  return Promise.resolve(mails.find((mail) => mail.id === mailId))
 }
 
 function _createMails() {
@@ -60,7 +59,7 @@ function _createMails() {
         subject: '[Slack] New message from Oren Yaniv',
         body: 'Yo Puki, good job with your last project!',
         isRead: false,
-        sentAt: 1551133930594,
+        sentAt: 1640780664700,
         to: loggedinUser.email,
         from: 'orenyan@momo.com',
         nickname:'Oren'

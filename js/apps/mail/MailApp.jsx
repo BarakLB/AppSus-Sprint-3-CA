@@ -1,8 +1,8 @@
 const { Route, Switch } = ReactRouterDOM;
 
 import { MailList } from './pages/MailList.jsx';
+import { EmailDetails } from './pages/EmailDetails.jsx';
 
-import { mailService } from './services/mail.service.js';
 
 export class MailApp extends React.Component {
  
@@ -13,7 +13,8 @@ export class MailApp extends React.Component {
       <section>
         <main>
           <Switch>
-            <Route path="/mail" component={MailList}></Route>
+            <Route path="/mail/edit/:mailId" component={EmailDetails} />
+            <Route path="/mail" component={MailList}/>
           </Switch>
         </main>
       </section>

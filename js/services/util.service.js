@@ -6,6 +6,7 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    handleTimestamp,
 }
 
 function makeId(length = 6) {
@@ -60,4 +61,20 @@ function getMonthName(date) {
         "July", "August", "September", "October", "November", "December"
     ]
     return monthNames[date.getMonth()]
+}
+
+function handleTimestamp(timestamp) {
+    const now = Date.now()
+    const diff = now - timestamp;
+
+
+    if (diff < 1000 * 60 * 60 * 24) return 'Today'
+    if (diff < 1000 * 60 * 60 * 24 * 2) return 'Yesterday'
+
+    const date = new Date(timestamp);
+    const day = date.getDay();
+    const month = date.toLocaleString('en', { month: 'short' });
+
+    return month + ' ' + day
+
 }

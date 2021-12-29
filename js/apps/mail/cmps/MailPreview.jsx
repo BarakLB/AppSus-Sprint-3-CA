@@ -1,13 +1,24 @@
+import { utilService } from "../../../services/util.service.js"
+
+const { Link } = ReactRouterDOM
+
+
+
 export function MailPreview({mail}) {
     console.log('mail:', mail)
-return <section>
+return <section className="flex">
+    <Link className="clean-link" to={`mail/edit/${mail.id}`}>
     <div className= "sender-name">
-        <h3>{mail.nickname}</h3>
+        <p>{mail.nickname}</p>
     </div>
     <div className= "mail-subject">
-        <h3>{mail.subject}</h3>
+        <p>{mail.subject}</p>
+        <p>{mail.body}</p>
     </div>
-
+    <div className="sent-at">
+        <h3>{utilService.handleTimestamp(mail.sentAt)}</h3>
+    </div>
+    </Link>
 </section>
 
 
