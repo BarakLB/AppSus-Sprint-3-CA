@@ -3,15 +3,15 @@ export function DynamicNoteType({note}) {
 
     return (
         <section className="note-container">
-            {note.info.video && <iframe src={note.info.video} width="100%"  height="200" />}
-            {note.info.url && <img src={note.info.url}/>}
+            {note.info.video && <iframe src={note.info.video} width="100%"  height="315"></iframe>}
+            {note.info.img && <img src={note.info.img}/>}
                 <div className="note-ctx">
-                    {note.info.title && <h4>{note.info.title}</h4>}
+                    {note.info.header && <h4>{note.info.header}</h4>}
                     <p>{note.info.txt}</p>
                 </div>
 
                     <ul>
-                        {note.info.todo && note.info.todo.map((todo) => {
+                        {note.info.todos && note.info.todos.map((todo) => {
                             return <li key={todo.id}>{todo.txt}</li>
                         })}
                     </ul>

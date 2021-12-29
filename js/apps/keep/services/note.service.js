@@ -4,6 +4,7 @@ import { storageService } from '../../../services/storage.service.js';
 export const noteService = {
   query,
   getNoteById,
+  addNote,
 };
 
 const KEY = 'noteDB';
@@ -19,37 +20,80 @@ function getNoteById(noteId) {
   return Promise.resolve(notes.find((note) => note.id === noteId));
 }
 
+function addNote(noteInfo) {
+  const notes = _loadNotesFromStorage();
+  const newNote = {
+    id: utilService.makeId(),
+    isPinned: false,
+    info: {
+      img: noteInfo.img,
+      video: noteInfo.video,
+      header: noteInfo.header,
+      txt: noteInfo.txt,
+      todos: [...(noteInfo.todos || [])]
+    }
+  }
+
+  notes.unshift(newNote);
+  _saveNotesToStorage(notes)
+}
+
 function _createNotes() {
   let notes = _loadNotesFromStorage();
   if (!notes || !notes.length) {
     notes = [
       {
         id: utilService.makeId(),
-        type: 'note-txt',
+        type: 'text',
         isPinned: true,
         info: {
+          img: 'https://robohash.org/2',
+          video: null,
+          header: 'Go for it!',
           txt: 'Fullstack Me Baby!',
+          todos: [],
         },
       },
       {
         id: utilService.makeId(),
-        type: 'note-img',
+        type: 'photo',
+        isPinned: false,
         info: {
-          url: 'https://robohash.org/1',
-          title: 'Bobi and Me',
-        },
-        style: {
-          backgroundColor: '#00d',
+          img: 'https://robohash.org/1',
+          video: null,
+          header: 'Go for it!',
+          txt: null,
+          todos: [],
         },
       },
       {
         id: utilService.makeId(),
-        type: 'note-todos',
+        type: 'video',
+        isPinned: false,
         info: {
-          label: 'Get my stuff together',
+          img: null,
+          video: 'https://www.youtube.com/embed/rt-2cxAiPJk',
+          header: null,
+          txt: 'You have to watch this movie!',
+          todos: [],
+        },
+      },
+      {
+        id: utilService.makeId(),
+        type: 'todo',
+        isPinned: false,
+        info: {
+          img: null,
+          video: null,
+          header: "Don't Forget:",
+          txt: null,
           todos: [
-            { txt: 'Driving license', doneAt: null },
-            { txt: 'Coding power', doneAt: 187111111 },
+            {
+              id: utilService.makeId(),
+              txt: 'Finish up your projects',
+              doneAt: Date.now,
+            },
+            { id: utilService.makeId(), txt: 'Code & Sleep' },
           ],
         },
       },
