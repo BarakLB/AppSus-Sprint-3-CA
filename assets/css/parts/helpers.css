@@ -10,6 +10,13 @@
     align-items: center;
 }
 
+.flex.justify-center {
+    justify-content: center;
+}
+
+
+
+
 .clean-list {
     list-style: none;
     margin: 0;
@@ -20,3 +27,4 @@
     text-decoration: none;
     color: inherit;
 }
+

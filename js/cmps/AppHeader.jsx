@@ -5,7 +5,7 @@ export class AppHeader extends React.Component {
     render() {
         return <header className="main-header flex space-between align-center">
         <Link className="clean-link" to="/">
-        <h1>HEADER</h1>
+        <h1>APPSUS</h1>
         </Link>
         <nav className="navbar">
             <NavLink className="clean-link" exact to="/">  Home</NavLink>

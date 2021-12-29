@@ -1,3 +1,13 @@
-*{
-    box-sizing: border-box;
+
+/* BASICS */
+@import "./parts/helpers.css";
+
+/* PAGES */
+@import "./pages/home.css";
+
+/* COMPONENTS  */
+@import "./cmps/app-header.css";
+
+.main-header {
+    display: flex;
 }
