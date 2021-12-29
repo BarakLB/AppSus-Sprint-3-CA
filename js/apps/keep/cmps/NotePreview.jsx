@@ -16,7 +16,7 @@ export class NotePreview extends React.Component {
     const { note } = this.state;
 
     if (!note) return <div>Loading...</div>;
-    return <article className="note-preview flex justify-between direction-column" id={note.id}>
+    return <article className="note-preview" id={note.id}>
         <DynamicNoteType note={note} />
     </article>;
   }

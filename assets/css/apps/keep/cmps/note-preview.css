@@ -33,3 +33,8 @@
 .note-ctx h4 {
     margin-bottom: 10px;
 }
+
+.daily-notes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}

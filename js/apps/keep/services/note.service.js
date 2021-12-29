@@ -24,11 +24,21 @@ function query(filterBy) {
     return Promise.resolve(shownNotes);
 
   }else if (filterBy.txt) {
-    const searchStr = filterBy.txt
-    const notesToShow = gNotes.filter(note => {
-        if (note.info.txt) return note.info.txt.toLowerCase().includes(searchStr)
-        if (note.info.title) return note.info.title.toLowerCase().includes(searchStr)
-        if (note.info.todos) return note.info.todos.some(todo => todo.includes(searchStr))
+    const notesToShow = notes.filter((note) => {
+      let headerMatches;
+      let txtMatches;
+      // let todoMatches;
+      const searchStr = filterBy.txt.toLowerCase();
+
+      if (note.info.header) headerMatches = note.info.header.toLowerCase().includes(searchStr)
+      if (note.info.txt) txtMatches = note.info.txt.toLowerCase().includes(searchStr)
+      // if (note.info.todos.length) {
+      //   todoMatches = note.info.todos.filter((todo, idx) => {
+      //     return note.info.todos[idx].txt.toLowerCase().includes(searchStr)
+      //   })
+      // }
+
+      return headerMatches || txtMatches;  
     })
 
     return Promise.resolve(notesToShow);
@@ -135,7 +145,26 @@ function _createNotes() {
               txt: 'Finish up your projects',
               doneAt: Date.now,
             },
-            { id: utilService.makeId(), txt: 'Code & Sleep' },
+            { id: utilService.makeId(), txt: 'Code & Sleep', doneAt: Date.now, },
+          ],
+        },
+      },
+      {
+        id: utilService.makeId(),
+        type: 'todo',
+        isPinned: false,
+        info: {
+          img: null,
+          video: null,
+          header: "Gotta do it:",
+          txt: null,
+          todos: [
+            {
+              id: utilService.makeId(),
+              txt: 'Feed the dog',
+              doneAt: Date.now,
+            },
+            { id: utilService.makeId(), txt: 'Watch this movie', doneAt: Date.now, },
           ],
         },
       },

@@ -7,6 +7,7 @@ export class NoteApp extends React.Component {
     notes: [],
     filterBy: {
       type: 'all',
+      txt: '',
     }
   };
 
@@ -39,7 +40,7 @@ export class NoteApp extends React.Component {
       return <p>There are no notes to be shown...</p>;
     console.log(notes);
     return (
-      <section className="note-app">
+      <section className="note-app main-layout">
         <NoteFilter loadNotes={this.loadNotes} />
         <NoteList notes={notes} />
       </section>
