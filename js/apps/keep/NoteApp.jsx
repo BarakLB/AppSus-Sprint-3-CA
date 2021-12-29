@@ -14,14 +14,17 @@ export class NoteApp extends React.Component {
     this.loadNotes();
   }
 
-  loadNotes = () => {
-    noteService.query().then((notes) => {
-      this.setState({ notes });
-    });
-  };
+  loadNotes = (filterBy) => {
+    noteService.getPinnedNotes().then(pinnedNotes => {
+        this.setState({ pinnedNotes })
+    })
+    noteService.query(filterBy).then(notes => {
+        this.setState({ notes })
+    })
+}
 
   onAddNote = (note, callback) => {
-    NoteService.addNote(note).then(() => {
+    noteService.addNote(note).then(() => {
         this.loadNotes()
         callback && callback()
     })
@@ -37,7 +40,7 @@ export class NoteApp extends React.Component {
     console.log(notes);
     return (
       <section className="note-app">
-        <NoteFilter />
+        <NoteFilter loadNotes={this.loadNotes} />
         <NoteList notes={notes} />
       </section>
     );

@@ -24,10 +24,10 @@ export class MailFilter extends React.Component {
         const { txt, currFilter } = this.state.filterBy;
         console.log(txt)
         console.log('curr', currFilter)
-        return <section>
-            <div className="search-mail-container">
+        return <section className="flex justify-center">
+            <div className="search-mail-container flex justify-center ">
                 <label htmlFor="search"><i className="fas fa-search"></i>
-                    <input type="text" id="search" placeholer="Search here..." name="txt" value={txt}
+                    <input className="search-input" type="text" id="search" placeholder="Search here..." name="txt" value={txt}
                         onChange={this.onFilter}></input>
                 </label>
             </div>
@@ -39,14 +39,12 @@ export class MailFilter extends React.Component {
                     <option value="read">Read</option>
                     <option value="unread">Unread</option>
                 </select>
-            </div>
-
-            <div>
                 <label htmlFor="sort-by"><i className="fas fa-sort"></i> Sort by:</label>
                 <select id="sort-by" name="sortBy" onChange={this.onSort}>
                     <option value="date">Date</option>
                 </select>
             </div>
+
         </section>
     }
 }

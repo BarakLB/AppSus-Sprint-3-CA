@@ -15,7 +15,7 @@ export class MailApp extends React.Component {
     // console.log(this.state.mails);
     return (
       <section>
-        <main>
+        <main className='main-layout'>
           <Switch>
             
             <Route path="/mail/edit/:mailId" component={EmailDetails} />
