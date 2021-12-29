@@ -4,7 +4,7 @@ import { mailService } from '../services/mail.service.js';
 
 //CMPS
 import { MailPreview } from '../cmps/MailPreview.jsx';
-
+import { MailFolderList } from '../cmps/MailFolderList.jsx';
 
 export class MailList extends React.Component {
 
@@ -30,15 +30,19 @@ export class MailList extends React.Component {
     };
 
     render() {
-        const {mails} = this.state
-        
+        const { mails } = this.state
+
         if (!this.state.mails.length) return <p>No Mails</p>
         console.log(mails)
         return (
             <section>
-               { mails.map((mail) => {
-            return <MailPreview key={mail.id} mail={mail}/>
-               })}
+                <MailFolderList />
+                <div className="mails-container">
+                    {mails.map((mail) => {
+                        return <MailPreview key={mail.id} mail={mail} />
+                    })}
+                </div >
+                
             </section>
         )
     }
