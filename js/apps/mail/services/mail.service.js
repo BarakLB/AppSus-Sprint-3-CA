@@ -43,6 +43,7 @@ function _createMails() {
         sentAt: 1551133930594,
         to: loggedinUser.email,
         from: 'momo@momo.com',
+        nickname:'Momo'
       },
       {
         id: utilService.makeId(),
@@ -52,6 +53,7 @@ function _createMails() {
         sentAt: 155133900594,
         to: loggedinUser.email,
         from: 'danielShakedKingy@momo.com',
+        nickname:'GitHub.Inc'
       },
       {
         id: utilService.makeId(),
@@ -61,6 +63,8 @@ function _createMails() {
         sentAt: 1551133930594,
         to: loggedinUser.email,
         from: 'orenyan@momo.com',
+        nickname:'Oren'
+     
       },
     ];
   }
