@@ -1,4 +1,5 @@
 import { noteService } from './services/note.service.js';
+import { NoteList } from './cmps/NoteList.jsx'
 
 export class NoteApp extends React.Component {
   state = {
