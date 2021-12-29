@@ -25,7 +25,7 @@ export class EmailDetails extends React.Component {
     render() {
         const { mail } = this.state
         if (!mail) return <Loader/>
-        return <section className="mail-preview">
+        return <section className="mail-details">
             <h3>Sent At: {utilService.handleTimestamp(mail.sentAt)}</h3>
             <h4>From: {mail.nickname}, {mail.from}</h4>
             <h1> {mail.subject}</h1>

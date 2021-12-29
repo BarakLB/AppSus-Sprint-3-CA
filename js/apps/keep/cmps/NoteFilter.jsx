@@ -1,27 +1,40 @@
 export class NoteFilter extends React.Component {
     state = {
-        type: null,
+        filterBy: {
+            type: '',
+            txt: ''
+        }
     }
 
-    handleChange = ({ target }) => {
-        const { onFilterChange } = this.props;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({ [name]: value }, () => onFilterChange(this.state));
+    handleChange = (value, isTxt) => {
+        if (isTxt) {
+            this.setState({ filterBy: { ...this.state.filterBy, txt: value } }, () => {
+                this.props.loadNotes(this.state.filterBy)
+            })
+        } else {
+            this.setState({ filterBy: { ...this.state.filterBy, type: value } }, () => {
+                this.props.loadNotes(this.state.filterBy)
+            })
+        }
     }
 
     render() {
+        console.log(this.state.filterBy);
         return (
-            <section className="search-type">
-                <select name="type" onChange={this.handleChange}>
-                    <option value="all">All</option>
-                    <option value="text">Text</option>
-                    <option value="Video">Video</option>
-                    <option value="photo">Photo</option>
-                    <option value="todo">To-Do</option>
-                </select>
+            <section className="note-filter">
+                <div className="input-container note-filter-input">
+                    <div className="input-wrapper">
+                        <input type="text" name="txt-filter" placeholder="Search for a note" onChange={(ev) => this.handleChange(ev.target.value, true)} />
+                        <div className="filter-by-type">
+                            <button className="icon-button" onClick={() => this.handleChange('img')}><i title="image notes" className="far fa-image" ></i></button>
+                            <button className="icon-button" onClick={() => this.handleChange('todos')}><i title="todo notes" className="fas fa-list-ul"></i></button>
+                            <button className="icon-button" onClick={() => this.handleChange('txt')}><i title="text notes" className="fas fa-file-alt"></i></button>
+                            <button className="icon-button" onClick={() => this.handleChange('video')}><i title="video notes" className="fas fa-video"></i></button>
+                            <button className="icon-button" onClick={() => this.handleChange('')}><i title="all notes" className="fas fa-globe-americas"></i></button>
+                        </div>
+                    </div>
+                </div>
             </section>
         )
     }
-}
+} 

@@ -18,6 +18,10 @@
     flex-direction: column;
 }
 
+.flex.direction-row {
+    flex-direction: row;
+}
+
 
 
 .clean-list {
@@ -31,3 +35,8 @@
     color: inherit;
 }
 
+/* LAYOUT */
+.main-layout {
+    max-width: 980px;
+    margin: 0 auto;
+}

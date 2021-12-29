@@ -5,19 +5,61 @@ export const noteService = {
   query,
   getNoteById,
   addNote,
+  getPinnedNotes,
+
 };
 
 const KEY = 'noteDB';
 _createNotes();
 
-function query() {
+function query(filterBy) {
   const notes = _loadNotesFromStorage();
+  if (!filterBy) return Promise.resolve(notes);
+  if (filterBy.type) {
+    const shownNotes = notes.filter((note) => {
+      if (filterBy.type === 'todos') return note.info.todos.length;
+      return note.info[filterBy.type];
+    })
+
+    return Promise.resolve(shownNotes);
+
+  }else if (filterBy.txt) {
+    const searchStr = filterBy.txt
+    const notesToShow = gNotes.filter(note => {
+        if (note.info.txt) return note.info.txt.toLowerCase().includes(searchStr)
+        if (note.info.title) return note.info.title.toLowerCase().includes(searchStr)
+        if (note.info.todos) return note.info.todos.some(todo => todo.includes(searchStr))
+    })
+
+    return Promise.resolve(notesToShow);
+  }
+
   return Promise.resolve(notes);
 }
 
 function getNoteById(noteId) {
   let notes = _loadNotesFromStorage();
   return Promise.resolve(notes.find((note) => note.id === noteId));
+}
+
+function getPinnedNotes() {
+  let pinnedNotes = _loadNotesFromStorage('pinnedDB');
+  let notes = _loadNotesFromStorage();
+
+  if (!pinnedNotes || !pinnedNotes.length) {
+    pinnedNotes = []
+    const pinnedNotesIds = notes.filter(note => note.isPinned).map(note => note.id)
+    pinnedNotesIds.forEach(id => {
+      const idx = notes.findIndex(note => note.id === id)
+      const currNote = notes[idx];
+
+      pinnedNotes.push(currNote);
+      notes.splice(idx, 1)
+    })
+  }
+  _savePinnedNotesToStorage(pinnedNotes);
+  
+  return Promise.resolve(pinnedNotes); 
 }
 
 function addNote(noteInfo) {
@@ -107,6 +149,10 @@ function _saveNotesToStorage(notes) {
   storageService.saveToStorage(KEY, notes);
 }
 
-function _loadNotesFromStorage() {
-  return storageService.loadFromStorage(KEY);
+function _loadNotesFromStorage(key = KEY) {
+  return storageService.loadFromStorage(key);
+}
+
+function _savePinnedNotesToStorage(pinnedNotes) {
+  storageService.saveToStorage('pinnedDB', pinnedNotes)
 }

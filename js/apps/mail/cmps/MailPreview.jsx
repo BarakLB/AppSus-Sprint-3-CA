@@ -7,12 +7,12 @@ const { Link } = ReactRouterDOM
 export function MailPreview({ mail }) {
     mail.isRead = true
     console.log('sadasdasd',mail)
-    return <section className="flex">
-        <Link className="clean-link" to={`mail/edit/${mail.id}`}>
+    return <section className="mail-preview">
+        <Link className="mail-preview-link clean-link flex align-center justify-center" to={`mail/edit/${mail.id}`}>
             <div className="sender-name">
                 <p>{mail.nickname}</p>
             </div>
-            <div className="mail-subject">
+            <div className="mail-subject flex justify-between">
                 <p>{mail.subject}</p>
                 <p>{mail.body}</p>
             </div>

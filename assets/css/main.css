@@ -11,6 +11,10 @@
 /* KEEP APP */
 @import './apps/keep/cmps/note-preview.css';
 
+/* MAIL APP */
+@import './apps/mail/cmps/mail-filter.css';
+@import './apps/mail/cmps/mail-preview.css';
+
 .main-header {
     display: flex;
 }
