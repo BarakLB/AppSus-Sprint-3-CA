@@ -5,7 +5,7 @@ export const mailService = {
   query,
   getUser,
   getMailById,
-  mailsToShow,
+  updateIsRead,
 };
 
 const loggedinUser = {
@@ -16,29 +16,38 @@ const loggedinUser = {
 const KEY = 'mailsDB';
 _createMails();
 
-function query() {
+function query(filterBy = null) {
   const mails = _loadMailsFromStorage();
-  return Promise.resolve(mails);
+  if (!filterBy) return Promise.resolve(mails);
+  const filteredMails = _getMailsByFilter(filterBy)
+  // console.log(filteredMails)
+  return Promise.resolve(filteredMails);
 }
 
-function mailsToShow(criteria, filterBy, sortBy) {
-  // let mails = _getMailsByFolder(user, criteria);
-  console.log('mailstoshow', filterBy)
+
+function getMailIdx(mailId) {
+  const mails = _loadMailsFromStorage()
+  console.log(mails.findIndex(mail => mail.id === mailId))
+  return mails.findIndex(mail => mail.id === mailId)
+}
+
+
+
+function updateIsRead(mail) {
+  let i = getMailIdx(mail.id)
   let mails = _loadMailsFromStorage()
-  if (filterBy) mails = _getMailsByFilter(mails, filterBy)
-  // if (mails.length > 1) mails = _sortMails(mails, sortBy)
-  
-  return Promise.resolve(mails);
+  mails[i].isRead = true
+  _SaveMailsToStorage(mails)
 }
 
-function _getMailsByFilter(mails, filterBy) {
-  let { txt, currFilter } = filterBy;
-  const filteredMails = mails.filter(mail => {
-      return (mail.body.includes(txt) || mail.subject.includes(txt) || mail.to.includes(txt)) &&
-          ((currFilter === 'read') ? mail.isRead : ((currFilter === 'unread') ? !mail.isRead : true))
-  });
-  console.log('Filtered', filteredMails)
-  return filteredMails;
+function _getMailsByFilter(filterBy) {
+  console.log('getmail filterBy:', filterBy);
+
+  let mails = _loadMailsFromStorage()
+  mails.filter((mail) => {
+    return mail.isRead + '' === filterBy.isRead
+  })
+  console.log(mails)
 }
 
 function getUser() {
@@ -83,6 +92,17 @@ function _createMails() {
         sentAt: 1640780664700,
         to: loggedinUser.email,
         from: 'orenyan@momo.com',
+        nickname: 'Oren',
+        isStarred: true,
+      },
+      {
+        id: utilService.makeId(),
+        subject: 'Oren, I need a little help with my react application',
+        body: 'Hello Oren, Can you please help me fix some bugs in my app? cant make it on my own, Puki',
+        isRead: false,
+        sentAt: 1240780664700,
+        to: 'orenyan@momo.com',
+        from: loggedinUser.email,
         nickname: 'Oren',
         isStarred: true,
       },

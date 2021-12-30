@@ -4,7 +4,7 @@ const { Route, Switch } = ReactRouterDOM;
 //PAGES
 import { MailList } from './pages/MailList.jsx';
 import { EmailDetails } from './pages/EmailDetails.jsx';
-import { MailCompose } from './MailCompose.jsx'
+import { MailCompose } from './pages/MailCompose.jsx';
 
 
 
