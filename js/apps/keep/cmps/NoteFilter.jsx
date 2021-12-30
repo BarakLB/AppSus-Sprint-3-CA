@@ -19,7 +19,6 @@ export class NoteFilter extends React.Component {
     }
 
     render() {
-        console.log(this.state.filterBy);
         return (
             <section className="note-filter">
                 <div className="input-container note-filter-input">

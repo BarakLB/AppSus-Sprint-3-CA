@@ -9,7 +9,6 @@ export class NotePreview extends React.Component {
   componentDidMount(){
     const { note } = this.props;
     this.setState({ note });
-    console.log(note);
   }
 
   render() {
