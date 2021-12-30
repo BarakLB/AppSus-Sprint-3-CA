@@ -6,7 +6,10 @@ export const noteService = {
   getNoteById,
   addNote,
   getPinnedNotes,
-
+  getEmbedUrl,
+  addTodo,
+  removeTodo,
+  addNewNoteTodo,
 };
 
 const KEY = 'noteDB';
@@ -88,6 +91,46 @@ function addNote(noteInfo) {
 
   notes.unshift(newNote);
   _saveNotesToStorage(notes)
+
+  return Promise.resolve(notes);
+}
+
+function getEmbedUrl(url) {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+
+  return (match && match[2].length === 11)
+      ? match[2]
+      : null;
+}
+
+function addNewNoteTodo(todo) {
+  return Promise.resolve({ id: utilService.makeId(), txt: todo, doneAt: null })
+}
+
+function addTodo(noteId, todo) {
+  let notes = _loadNotesFromStorage();
+  let pinnedNotes = _loadNotesFromStorage('pinnedDB');
+  let note = notes.find(note => note.id === noteId);
+  if (!note) note = pinnedNotes.find(note => note.id === noteId);
+
+  note.info.todos.push({ id: utilService.makeId(), txt: todo, doneAt: null })
+  _saveNotesToStorage(notes);
+  _savePinnedNotesToStorage(pinnedNotes);
+}
+
+function removeTodo(noteId, todoId) {
+  let notes = _loadNotesFromStorage();
+  let pinnedNotes = _loadNotesFromStorage('pinnedDB');
+  let note = notes.find(note => note.id === noteId);
+  if (!note) note = pinnedNotes.find(note => note.id === noteId);
+  const idx = note.info.todox.findIndex(todo => todo.id !== todoId);
+
+  note.info.todos.splice(idx, 1);
+  _saveNotesToStorage(notes);
+  _savePinnedNotesToStorage(pinnedNotes);
+
+  return Promise.resolve();
 }
 
 function _createNotes() {

@@ -11,8 +11,8 @@ export function DynamicNoteType({note}) {
                 </div>
 
                     <ul>
-                        {note.info.todos && note.info.todos.map((todo) => {
-                            return <li key={todo.id}>{todo.txt}</li>
+                        {note.info.todos && note.info.todos.map((todo, idx) => {
+                            return <li key={idx}>{todo.txt}</li>
                         })}
                     </ul>
         </section>
