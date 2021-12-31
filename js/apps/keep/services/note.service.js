@@ -15,10 +15,12 @@ _createNotes();
 
 function query(filterBy) {
   let notes = _loadNotesFromStorage(KEY);
+
   if (filterBy) {
     const filteredNotes = notes.filter((note) => {
       return note.type === filterBy;
     });
+    
     return Promise.resolve(filteredNotes);
   }
 

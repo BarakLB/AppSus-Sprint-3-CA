@@ -2,11 +2,3 @@
   display: flex;
   color: #ff4c29;
 }
-
-.logo {
-  margin-left: 3.125rem;
-}
-
-.top-nav-link:last-of-type {    
-    margin-right: 3.125rem;
-}
