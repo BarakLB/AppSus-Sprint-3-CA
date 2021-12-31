@@ -1,0 +1,44 @@
+.book-list {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.card-title {
+  text-transform: capitalize;
+}
+
+.book-card {
+  background-color: #2d4059;
+  padding: 30px;
+  cursor: pointer;
+  transition: all 1s;
+  text-align: center;
+  width: 340px;
+  box-shadow: 5px 0 8px #000000;
+  height: 550px;
+}
+.book-card:hover {
+  background-color: #ff5722;
+  transform: scale(1.05);
+}
+
+.book-card img {
+  height: 18.75rem;
+}
+
+
+
+.red {
+  color: red;
+}
+
+.green {
+  color: limegreen;
+}
+
+.SALE {
+  background-color: red;
+  color: #fafafa;
+}

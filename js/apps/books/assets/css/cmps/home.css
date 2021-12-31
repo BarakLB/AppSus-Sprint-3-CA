@@ -1,0 +1,55 @@
+body,
+html {
+  height: 100%;
+}
+
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../../img/hero.jpg');
+  /* Set a specific height */
+  height: 850px;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.hero-image h1 {
+  font-size: 25px;
+}
+
+.hero-text button {
+  padding: 15px;
+  background-color: #ff562262;
+  font-size: 20px;
+  color: #eeeeee;
+  transition: background-color 1s;
+}
+
+.hero-text button:hover {
+  background-color: #ff5722;
+}
+/* Place text in the middle of the image */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home-txt {
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+  max-width:1050px;
+  margin: 30px auto;
+}
+
+.home-txt img {
+display: block;
+margin: 20px auto 15px;
+height: 70px;
+width: 70px;
+}

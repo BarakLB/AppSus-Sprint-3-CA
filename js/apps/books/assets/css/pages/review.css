@@ -1,0 +1,74 @@
+.reviews-container {
+    box-shadow: 0 0 3px 2px #dacece;
+    margin: 0 auto;
+    height: 400px;
+    width: 90%;
+    background-color: #53616b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+  }
+  
+  /* ADD REVIEW PAGE  */
+.review-page {
+    min-height: 81vh;
+}
+
+  .add-review-container {
+    margin: 20px auto;
+    padding: 50px;
+    height: 400px;
+    width: 50%;
+    background: rgb(26,44,71);
+    background: linear-gradient(90deg, rgba(26,44,71,1) 65%, rgba(255,87,34,1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #1b1b1b;
+    box-shadow: 5px 0 8px #000000;
+    
+  }
+  .add-review-container input {
+      padding: 7px;  
+      background-color: #EEEEEE;
+      font-size: 18px;
+    }
+    .add-review-container textarea {
+        background-color: #EEEEEE;
+        font-size: 18px;
+        margin: 20px 0 20px;
+    }
+  .add-review-container button {
+    font-size: 1.5rem;
+    padding: 5px;
+    background-color: #ff5622;
+    color: #EEEEEE;
+  }
+  
+  .book-review button:first-child {
+    align-self: flex-end;
+    background-color: transparent;
+  }
+  
+  .book-review button:active {
+    position: relative;
+    top: 2px;
+  }
+  
+  .review {
+    padding: 5px 5px;
+    margin-bottom: 5px;
+    border: 1px solid #161616;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .add-reviews-btn {
+    font-size: 20px;
+    background-color: #ff5622;
+    padding: 10px;
+    margin-bottom: 50px;
+  }

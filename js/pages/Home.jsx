@@ -8,6 +8,7 @@ export function Home() {
         <div className="flex space-around">
         <Link className="clean-link go-to-btn" to="/mail/">Go to Mail</Link>
         <Link className="clean-link go-to-btn" to="/note/">Go to Notes</Link>
+        <Link className="clean-link go-to-btn" to="/book/">Go to BookShop</Link>
         </div>
       </div>
     </section>
