@@ -48,7 +48,7 @@ export class MailFilter extends React.Component {
                 <select id="filter-by" name="isRead" value={isRead} onChange={this.handleChange}>
                     <option value={'all'}>All</option>
                     <option value={true}>Read</option>
-                    <option value={false}>Unread</option>
+                    <option value={'false'}>Unread</option>
                 </select>
                 <label htmlFor="sort-by"><i className="fas fa-sort"></i> Sort by:</label>
                 <select id="sort-by" value={sortBy} name="sortBy" onChange={this.handleChange}>

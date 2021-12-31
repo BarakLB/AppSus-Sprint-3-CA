@@ -7,6 +7,7 @@ export const mailService = {
   getMailById,
   updateIsRead,
   starClicked,
+  deleteMail,
 };
 
 const loggedinUser = {
@@ -23,23 +24,21 @@ function query(filterBy = null, sortBy = null) {
 
   let mails = _loadMailsFromStorage();
 
-  // console.log('filterBy,sortBy:', mails);
+  // console.log('querymails', mails);
 
   if (!filterBy && !sortBy) return Promise.resolve(mails);
   if (filterBy) {
-    console.log(mails)
     mails = _getMailsByFilter(filterBy, mails)
   }
   if (sortBy) {
     mails = getMailsBySort(sortBy)
-    // _SaveMailsToStorage(mails)
   }
   return Promise.resolve(mails)
 }
 
 // getMailsBySort('subject')
 function getMailsBySort(sortBy = null) {
- 
+
   let mails = _loadMailsFromStorage()
   let sortedMails = []
   if (sortBy === 'date') {
@@ -54,7 +53,7 @@ function getMailsBySort(sortBy = null) {
       return a.subject.localeCompare(b.subject);
     })
     // _SaveMailsToStorage(sortedMails)
-    console.log('mails after:', sortedMails);
+    // console.log('mails after:', sortedMails);
     return sortedMails
   }
 }
@@ -76,32 +75,40 @@ function updateIsRead(mail) {
 function _getMailsByFilter(filterBy, mails) {
   if (!mails) return
   let filteredMails = []
+  let deleted = []
   if (!filterBy.status) filterBy.status = 'inbox'
   console.log('filterBy:', filterBy);
+  // if(!filterBy.isRead) filterBy.isRead = 'true'
 
-
-  // mails = _loadMailsFromStorage()
   if (filterBy.status === 'inbox') {
+    deleted = mails.filter(mail => mail.isDeleted)
+    _saveDeletedMailsToStorage(deleted)
+    console.log('deleted:', deleted);
+
     filteredMails = mails.filter(mail => !mail.isDeleted)
-    // filteredMails = mails.filter(mail => mail.isRead)
-   
   }
   if (filterBy.status === 'starred') filteredMails = mails.filter(mail => mail.isStarred)
   if (filterBy.status === 'sent') filteredMails = mails.filter(mail => mail.isSent)
   if (filterBy.status === 'trash') {
-    const deleted = _loadMailsFromStorage(DELETED_KEY)
-    console.log('deleted2', deleted)
-return deleted
+    deleted = _loadMailsFromStorage(DELETED_KEY)
+    _saveDeletedMailsToStorage(deleted)
+    filteredMails = deleted
   }
 
-  if (filterBy.isRead === 'true')  filteredMails = mails.filter(mail => mail.isRead)
-  if (filterBy.isRead === 'false') filteredMails = mails.filter(mail => !mail.isRead)
-  if (filterBy.isRead === 'all')  filteredMails = mails
-  console.log('mails:', mails);
-  return filteredMails
+  if (filterBy.isRead === 'true') filteredMails = mails.filter(mail => mail.isRead && !mail.isDeleted)
+  if (filterBy.isRead === 'false') filteredMails = mails.filter(mail => !mail.isRead && !mail.isDeleted)
+  if (filterBy.isRead === 'all') filteredMails = mails
+  console.log('filteredMails:', filteredMails);
+  console.log('deleted:', deleted);
+
+  _SaveMailsToStorage(filteredMails)
+  return Promise.resolve(filteredMails)
   // return null
 
 }
+
+
+
 
 function getUser() {
   return Promise.resolve(loggedinUser);
@@ -126,7 +133,11 @@ function deleteMail(mailId) {
   const idx = getMailIdx(mailId)
   let deleted = _loadMailsFromStorage(DELETED_KEY)
   let mail = getMailById(mailId)
+  mails[idx].isDeleted = true
   deleted.push(mail)
+  _saveDeletedMailsToStorage(deleted)
+  console.log('deleted:', deleted);
+  
 }
 
 
@@ -203,10 +214,10 @@ function _createMails() {
       },
     ];
   }
-  let deleted = [];
-  deleted = mails.filter(mail => mail.isDeleted)
-  mails.filter(mail => !mail.isDeleted)
-  _saveDeletedMailsToStorage(deleted)
+  // let deleted = [];
+  // deleted = mails.filter(mail => mail.isDeleted)
+  // mails.filter(mail => !mail.isDeleted)
+  // _saveDeletedMailsToStorage(deleted)
 
   _SaveMailsToStorage(mails);
 }

@@ -16,7 +16,6 @@ export class EmailDetails extends React.Component {
 
     loadMail = () => {
         const id = this.props.match.params.mailId;
-        console.log(id)
         mailService.getMailById(id)
             .then(mail => {
                 if (!mail) this.props.history.push('/')

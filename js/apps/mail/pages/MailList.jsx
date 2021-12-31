@@ -14,22 +14,17 @@ export class MailList extends React.Component {
     state = {
         mails: [],
         filterBy: {
-            status: '',
+            status: 'inbox',
             txt: '',
-            isRead: null,
+            isRead: '',
         },
         sortBy: 'date',
-
+        deletedMails: [],
     };
 
     componentDidMount() {
         this.loadMails(this.state.filterBy);
-
     }
-
-
-
-
 
     loadMails = (filterBy = null, sortBy = null) => {
         console.log('in loadmails', filterBy, sortBy)
@@ -38,33 +33,17 @@ export class MailList extends React.Component {
         });
     };
 
-    //function toggleStar(boolean){
-    // mailsService.updateStarst(true/false).then(this.loadMials());
-    // }
-
 
     onFilter = (txt, isRead) => {
         console.log('check', txt, isRead)
         this.setState((prevState) => ({ ...prevState, filterBy: { ...prevState.filterBy, txt, isRead } }),
             () => this.loadMails(this.state.filterBy, this.state.sortBy))
-        // console.log(ev)
-        // const { loadMails } = this.props
-        // const field = ev.target.name;
-        // const value = ev.target.value;
-        // this.setState((prevState) => ({ ...prevState, filterBy: { ...prevState.filterBy, [field]: value } }),
-        //     () => loadMails(this.state.filterBy, this.state.sortBy))
-
     }
 
     onSort = (sortBy) => {
         console.log(sortBy)
         this.setState((prevState) => ({ ...prevState, sortBy }),
             () => this.loadMails(this.state.filterBy, this.state.sortBy))
-        // const { loadMails } = this.props
-        // const value = ev.target.value;
-        // console.log('on sort', value)
-        // this.setState((prevState) => ({ ...prevState, sortBy: value }),
-        //     () => loadMails(this.state.filterBy, this.state.sortBy))
     }
 
     toggleStar = (mail) => {
