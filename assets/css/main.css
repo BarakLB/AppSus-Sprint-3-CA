@@ -17,6 +17,7 @@
 @import './apps/keep/cmps/note-filter.css';
 
 /* MAIL APP */
+@import './apps/mail/mail-app.css';
 /* PAGES */
 @import './apps/mail/pages/mail-compose.css';
 @import './apps/mail/pages/mail-list.css';

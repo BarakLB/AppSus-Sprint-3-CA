@@ -5,8 +5,10 @@ export function Home() {
     <section className="hero-img">
       <div className="hero-text">
         <h2>Welcome To Your Digital Workspace</h2>
-        <Link className="clean-link go-to-mail-btn" to="/mail/">Go to Mail</Link>
-        <Link className="clean-link go-to-mail-btn" to="/note/">Go to Notes</Link>
+        <div className="flex space-around">
+        <Link className="clean-link go-to-btn" to="/mail/">Go to Mail</Link>
+        <Link className="clean-link go-to-btn" to="/note/">Go to Notes</Link>
+        </div>
       </div>
     </section>
   );

@@ -1,18 +1,35 @@
 .mail-side-nav li{
     border: 1px solid black;
-max-width: 100%;
-text-align: center;
-background-color: #90B8F8;
-color:#26282B
+    max-width: 90%;
+    background-color: #90B8F8;
+    color:#26282B;
+    border-radius: 40px;
+    transition: all 300ms;
+    margin: 0 auto;
+    box-shadow: 3px 1px 8px #202020;
 }
 
+.mail-side-nav li:hover{
+    background-color: #5f85db;
+    color: #EEEEEE;
+    transform: scale(1.05);
+    transform: translateX(-5%);
+}
 
+.navlink {
+    margin:0 auto;
+    padding: 15px;
+    font-size: 18px;
+}
 
 .mail-side-nav {
     grid-area: folders;
-    /* gap: 30px; */
+    padding: 20px;
 }
 
 .side-ul {
-margin-top: 45px;
+    margin-top: 10px;
+}
+.side-ul li {
+margin-top: 10px;
 }

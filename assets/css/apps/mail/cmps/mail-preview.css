@@ -1,13 +1,23 @@
+.mail-preview-link {
+    gap: 40px;
+    /* padding: 0 10px 0 10px; */
+}
 .mail-preview {
     border: 1px solid #000;
     max-width: 980px;
     background-color: #334756;
     transition: transform 300ms ease;
-    padding: 0 10px 0 10px;
+    padding: 0 15px 0 15px;
+    /* gap: 500px; */
 }
 
 .mail-preview:hover {
     box-shadow: 0px 0px 10px -2px #000000;
     background-color: #2D4059;
     transform: scale(1.015);
+}
+
+.star-btn {
+    background-color: transparent;
+    font-size: 25px;
 }

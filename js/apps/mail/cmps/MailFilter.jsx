@@ -23,18 +23,11 @@ export class MailFilter extends React.Component {
     };
 
 
-    get ctgSearchParam() {
-        const urlSearchParams = new URLSearchParams(this.props.location.search)
-        return urlSearchParams.get('ctg')
-    }
-
 
     render() {
         const { txt, isRead, sortBy } = this.state;
-        // const { txt, currFilter } = this.state.filterBy;
-        const { onFilter, onSort } = this.props
-        // console.log(this.state.sortBy,'sortBy')
-        // console.log(this.props)
+    
+     
         return <section className="top-search flex justify-center">
             <div className="search-mail-container flex justify-center ">
                 <label htmlFor="search"><i className="fas fa-search"></i>

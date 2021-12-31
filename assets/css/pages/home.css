@@ -19,4 +19,14 @@
 
   .hero-text {
     text-align: center;
+    background-color: #2228312c;
+    padding: 20px;
+  }
+
+  .go-to-btn {
+    background-color: #22283193;
+    padding: 8px;
+  }
+  .go-to-btn:hover {
+    background-color: #6a7f6a;
   }

@@ -1,28 +1,31 @@
-
 .mails-container {
-    display: grid;
-    grid-template-columns: 3fr 8fr;
-    grid-template-areas: "folders mails";
-    gap: 15px;
+  display: grid;
+  grid-template-columns: 3fr 8fr;
+  grid-template-areas: 'folders mails';
+  gap: 15px;
+  padding: 20px;
 }
 
-
 .mail-list-headers {
-background-color:#5F85DB;
-padding: 0 10px 0 10px;
+  background-color: #5f85db;
+  padding: 0 10px 0 10px;
 }
 
 .compose-btn {
-    margin-bottom: 20px;
-    transition: transform 250ms;
-    background-color: #90B8F8;
-    color: #26282B;
-    padding: 20px;
-    font-size: 25px;
-    border-radius: 40px;
-
-
+  /* margin-bottom: 20px; */
+  transition: all 250ms ease;
+  background-color: #90b8f8;
+  color: #26282b;
+  border-radius: 40px;
+  width: 90%;
+  
+  padding: 15px;
+  font-size: 18px;
 }
 .compose-btn:hover {
     transform: translateY(-10px);
+    background-color: #5f85db;
+    color: #EEEEEE;
 }
+
+

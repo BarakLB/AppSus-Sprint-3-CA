@@ -5,30 +5,34 @@ export class MailFolderList extends React.Component {
 
     render() {
         const { onSetFoldersFilter } = this.props
-        return <section className="mail-side-nav">
+        return <section className="mail-side-nav ">
 
-            <Link className=" clean-link" to="/mail/new">
-                <button className="compose-btn">
-                <i className="fas fa-plus"></i>New mail
-                </button>
-                </Link>
+
 
             <ul className="side-ul clean-list">
+
                 <li className="flex align-center">
-                    <NavLink  className="clean-link" to="/mail/inbox" onClick={()=>onSetFoldersFilter('inbox')}>
-                    Inbox </NavLink><i className="fas fa-box-open"></i>
+                    <NavLink className=" clean-link navlink" to="/mail/new">
+                        {/* <button className="compose-btn"> */}
+                        <i className="fas fa-plus"></i>New mail
+                        {/* </button> */}
+                    </NavLink>
                 </li>
                 <li className="flex align-center">
-                    <NavLink className="clean-link" to="/mail/starred" onClick={()=>onSetFoldersFilter('starred')}>
-                    Starred </NavLink><i className="fas fa-star"></i> 
-                </li>
-                <li className="flex align-center"> 
-                    <NavLink className="clean-link" to="/mail/sent" onClick={()=>onSetFoldersFilter('sent')}>
-                    Sent </NavLink><i className="fas fa-paper-plane"></i>
+                    <NavLink className="clean-link navlink" to="/mail/inbox" onClick={() => onSetFoldersFilter('inbox')}>
+                        <i className="fas fa-box-open"></i> Inbox</NavLink>
                 </li>
                 <li className="flex align-center">
-                    <NavLink className="clean-link" to="/mail/trash" onClick={()=>onSetFoldersFilter('trash')}>
-                    Trash </NavLink><i className="fas fa-trash"></i>
+                    <NavLink className="clean-link navlink" to="/mail/starred" onClick={() => onSetFoldersFilter('starred')}>
+                        <i className="fas fa-star"></i>  Starred</NavLink>
+                </li>
+                <li className="flex align-center">
+                    <NavLink className="clean-link navlink" to="/mail/sent" onClick={() => onSetFoldersFilter('sent')}>
+                        <i className="fas fa-paper-plane"></i> Sent</NavLink>
+                </li>
+                <li className="flex align-center">
+                    <NavLink className="clean-link navlink" to="/mail/trash" onClick={() => onSetFoldersFilter('trash')}>
+                        <i className="fas fa-trash"></i> Trash</NavLink>
                 </li>
 
             </ul>

@@ -78,7 +78,7 @@ function _getMailsByFilter(filterBy, mails) {
   let deleted = []
   if (!filterBy.status) filterBy.status = 'inbox'
   console.log('filterBy:', filterBy);
-  // if(!filterBy.isRead) filterBy.isRead = 'true'
+
 
   if (filterBy.status === 'inbox') {
     deleted = mails.filter(mail => mail.isDeleted)
@@ -131,12 +131,15 @@ function starClicked(mail) {
 function deleteMail(mailId) {
   let mails = _loadMailsFromStorage()
   const idx = getMailIdx(mailId)
-  let deleted = _loadMailsFromStorage(DELETED_KEY)
-  let mail = getMailById(mailId)
+ let deleted = _loadMailsFromStorage(DELETED_KEY)
+ console.log('deleted:', deleted);
+ 
   mails[idx].isDeleted = true
-  deleted.push(mail)
+  deleted.push(mails[idx])
+  mails.filter(mail => !mail.isDeleted)
+  _SaveMailsToStorage(mails)
   _saveDeletedMailsToStorage(deleted)
-  console.log('deleted:', deleted);
+ console.log(mails[idx])
   
 }
 
