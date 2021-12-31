@@ -1,16 +1,21 @@
-import { NotePreview } from './NotePreview.jsx';
+import { NotePreview } from './NotePreview.jsx'
+import { DynamicNoteCmp } from './DynamicNoteCmp.jsx'
+export function NoteList({ notes, removeNote, styleNote, togglePinNote }) {
+    if (!notes.length) return <div>There are not any notes to be shown...</div>
+    return (
+        <div className="notes-list" >
+            {notes.map(note => {
+                return <section key={note.id} style={note.style} className="single-note ">
+                    <div >
+                        <DynamicNoteCmp  note={note} />
+                    </div>
+                    <div >
+                        <NotePreview  note={note} removeNote={removeNote} styleNote={styleNote} togglePinNote={togglePinNote} />
+                    </div>
+                </section>
 
-export function NoteList({ notes }) {
-  return (
-    <section className="note-list">
-      <h2>Pinned Notes</h2>
-      <div className="pinned-notes"></div>
-      <h2>Day-To-Day Notes</h2>
-      <div className="daily-notes">
-        {notes.map((note) => (
-          <NotePreview key={note.id} note={note} />
-        ))}
-      </div>
-    </section>
-  );
+            })}
+        </div>
+
+    );
 }

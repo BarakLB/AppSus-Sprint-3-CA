@@ -1,0 +1,35 @@
+.add-note{
+    background-color: #d8e3e6;
+    padding: 15px;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.note-input input{
+    width: 500px;
+    padding: 5px;
+    flex: 1;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgb(39, 39, 39);
+}
+
+.choose-type-buttons {
+    flex: 1;
+    justify-content: space-evenly;
+}
+
+.choose-type-buttons >*{
+    color: rgb(167, 167, 167);
+    background-color: inherit;
+    border: none;
+    width: 50px;
+}
+
+button.active{
+   color:  rgb(15, 15, 15);
+}
+
+.add-note i{
+font-size: 30px;
+}

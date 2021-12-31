@@ -1,3 +1,5 @@
-*{
-    box-sizing: border-box;
+.main-app-notes{
+    align-items: center;
+    justify-content: center;
+    margin: 0 15%;
 }

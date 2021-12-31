@@ -1,0 +1,33 @@
+.notes-list{
+    column-count: 3;
+    column-span: all;
+    column-gap: 50px;
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr); */
+}
+
+.single-note{
+    display: inline-block;
+    position: relative;
+    width: 330px;
+    padding: 10px;
+    margin: 20px 0 30px 0;
+    box-shadow: 0px 0px 10px rgb(95, 95, 95);
+    border-radius: 1rem;
+}
+
+.notes-list i.type{
+font-size: 20px;
+position:absolute;
+left: 10px;
+bottom: 10px;
+color: rgb(0, 0, 0);
+cursor:auto;
+}
+
+.note-img,
+.note-video,
+.note-text,
+.note-todos{
+    margin-bottom: 50px;
+}
