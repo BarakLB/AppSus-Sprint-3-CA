@@ -71,7 +71,7 @@ export class NoteApp extends React.Component {
         const unPinnedNotes = this.loadPinnedNotes(false)
         if (!notes) return <div>Loading...</div>
         return (
-            <section className="main-app-notes main-layout flex direction-column">
+            <section className="main-app-notes main-layout flex direction-column justify-center align-center">
                 <NoteAdd notes={this.loadNotes} />
                 <NoteFilter onSetFilter={this.onSetFilter} />
                 <div className="pinned-notes"> <h1>Pinned-notes</h1><hr />

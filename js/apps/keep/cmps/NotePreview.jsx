@@ -1,7 +1,7 @@
 export function NotePreview({ note, removeNote, styleNote,togglePinNote }) {
     const colors = ['DarkSeaGreen', 'CornflowerBlue', 'LightSlateGray', 'LemonChiffon']
     return (
-        <div className="manage-notes flex ">
+        <div className="manage-notes flex">
             <div className="change-color"><i className="fas fa-palette"></i>
                 <div className="color-palette flex">
                     {colors.map((color, idx) =>

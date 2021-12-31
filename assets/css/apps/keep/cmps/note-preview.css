@@ -26,7 +26,6 @@
     position: absolute;
     font-size: 20px;
     padding:  5px;
-    /* gap: 5px; */
     bottom: 0px;
     right: 10px;
 }
@@ -40,7 +39,6 @@ visibility: hidden;
     position: absolute;
     bottom: -15px;
     right: 40px;
-    /* z-index: 1; */
 }
 
 .note-img > img{
