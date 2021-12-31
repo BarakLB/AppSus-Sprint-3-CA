@@ -1,0 +1,18 @@
+.mail-side-nav li{
+    border: 1px solid black;
+max-width: 100%;
+text-align: center;
+background-color: #90B8F8;
+color:#26282B
+}
+
+
+
+.mail-side-nav {
+    grid-area: folders;
+    /* gap: 30px; */
+}
+
+.side-ul {
+margin-top: 45px;
+}

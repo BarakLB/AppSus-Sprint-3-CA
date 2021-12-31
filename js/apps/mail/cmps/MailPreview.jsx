@@ -7,11 +7,12 @@ import { TxtLength } from "./TxtLength.jsx"
 
 
 
-export function MailPreview({ mail }) {
-    
+export function MailPreview({ mail, toggleStar }) {
+    // let clicked;
+    // (mail.isStarred) ? 'clicked' : ''
     return <section className="mail-preview" >
 
-        <button > <i className="fas fa-star"></i></button>
+        <button onClick={() => toggleStar(mail)}> <i className={((mail.isStarred) ? "fas fa-star clicked" : "fas fa-star")} ></i></button>
 
         <Link className="mail-preview-link clean-link flex align-center space-between" to={`mail/edit/${mail.id}`} onClick={() => mailService.updateIsRead(mail)} >
             <div className="sender-name">

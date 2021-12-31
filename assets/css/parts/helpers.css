@@ -22,8 +22,16 @@
     flex-direction: row;
 }
 
+.flex.space-around {
+    justify-content: space-around;
+}
 
+/* COLORS */
+.fa-star.clicked {
+    color:gold
+}
 
+/* CLEANERS  */
 .clean-list {
     list-style: none;
     margin: 0;

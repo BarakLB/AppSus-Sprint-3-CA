@@ -14,10 +14,19 @@
 /* MAIL APP */
 /* PAGES */
 @import './apps/mail/pages/mail-compose.css';
+@import './apps/mail/pages/mail-list.css';
 /* COMPONENTS  */
 @import './apps/mail/cmps/mail-filter.css';
 @import './apps/mail/cmps/mail-preview.css';
+@import './apps/mail/cmps/mail-folders-list.css';
 
-.main-header {
-    display: flex;
-}
+
+/* FONTS  */
+@font-face {
+    font-family: poppins-regular;
+    src: url(../fonts/Poppins-Regular.ttf);
+  }
+
+
+
+

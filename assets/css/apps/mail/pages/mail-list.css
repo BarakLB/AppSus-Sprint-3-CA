@@ -1,0 +1,28 @@
+
+.mails-container {
+    display: grid;
+    grid-template-columns: 3fr 8fr;
+    grid-template-areas: "folders mails";
+    gap: 15px;
+}
+
+
+.mail-list-headers {
+background-color:#5F85DB;
+padding: 0 10px 0 10px;
+}
+
+.compose-btn {
+    margin-bottom: 20px;
+    transition: transform 250ms;
+    background-color: #90B8F8;
+    color: #26282B;
+    padding: 20px;
+    font-size: 25px;
+    border-radius: 40px;
+
+
+}
+.compose-btn:hover {
+    transform: translateY(-10px);
+}
