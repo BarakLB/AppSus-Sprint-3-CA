@@ -1,50 +1,60 @@
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .flex.space-between {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .flex.align-center {
-    align-items: center;
+  align-items: center;
 }
 
 .flex.justify-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .flex.direction-column {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .flex.direction-row {
-    flex-direction: row;
+  flex-direction: row;
 }
 
 .flex.space-around {
-    justify-content: space-around;
+  justify-content: space-around;
 }
 
 /* COLORS */
 .fa-star.clicked {
-    color:gold
+  color: gold;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.container {
+  width: 80vw;
+  margin: auto;
+  padding-top: 20px;
 }
 
 /* CLEANERS  */
 .clean-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .clean-link {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 /* LAYOUT */
 .main-layout {
-    max-width: 980px;
-    margin: 0 auto;
+  max-width: 980px;
+  margin: 0 auto;
 }

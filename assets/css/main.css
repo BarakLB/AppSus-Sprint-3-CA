@@ -9,7 +9,11 @@
 @import "./cmps/app-header.css";
 
 /* KEEP APP */
+/* @import './apps/keeps/note-app.css'; */
 @import './apps/keep/cmps/note-preview.css';
+@import './apps/keep/cmps/note-list.css';
+@import './apps/keep/cmps/note-add.css';
+@import './apps/keep/cmps/note-filter.css';
 
 /* MAIL APP */
 /* PAGES */

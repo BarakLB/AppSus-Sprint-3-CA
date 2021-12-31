@@ -1,22 +1,16 @@
-import { noteService } from '../services/note.service.js';
-import { DynamicNoteType } from './DynamicNoteType.jsx';
+export function NotePreview({ note, removeNote, styleNote,togglePinNote }) {
+    const colors = ['DarkSeaGreen', 'CornflowerBlue', 'LightSlateGray', 'LemonChiffon']
+    return (
+        <div className="manage-notes flex ">
+            <div className="change-color"><i className="fas fa-palette"></i>
+                <div className="color-palette flex">
+                    {colors.map((color, idx) =>
+                        <div className={`circle single-color-${color}`} key={idx} onClick={() => { styleNote(note.id, color) }}></div>)}
+                </div>
+            </div>
+            <i className="far fa-trash-alt" onClick={() => removeNote(note.id)}></i>
+            <i className="fas fa-thumbtack" onClick={() => togglePinNote(note)}></i>
+        </div>
+    )
 
-export class NotePreview extends React.Component {
-  state = {
-    note: null,
-  };
-
-  componentDidMount(){
-    const { note } = this.props;
-    this.setState({ note });
-  }
-
-  render() {
-    const { note } = this.state;
-
-    if (!note) return <div>Loading...</div>;
-    return <article className="note-preview" id={note.id}>
-        <DynamicNoteType note={note} />
-    </article>;
-  }
 }

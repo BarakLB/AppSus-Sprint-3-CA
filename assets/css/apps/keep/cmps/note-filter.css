@@ -1,0 +1,8 @@
+.filter-notes{
+    padding: 5px;
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: rgb(39, 39, 39);
+    border: 2px solid #d8e3e6;
+}
