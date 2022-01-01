@@ -39,15 +39,6 @@ export class NoteApp extends React.Component {
             })
     }
 
-    copyNote = (note, ev) => {
-        ev.stopPropagation();
-        noteService.copyNote(note)
-            .then(notes => {
-                this.setState({ notes })
-            })
-    }
-
-
     togglePinNote = (note) => {
         noteService.togglePinned(note)
             .then(notes => {

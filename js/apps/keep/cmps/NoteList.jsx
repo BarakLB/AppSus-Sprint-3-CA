@@ -1,5 +1,6 @@
 import { NotePreview } from './NotePreview.jsx'
 import { DynamicNoteCmp } from './DynamicNoteCmp.jsx'
+
 export function NoteList({ notes, removeNote, styleNote, togglePinNote }) {
     if (!notes.length) return <div>There are not any notes to be shown...</div>
     return (
