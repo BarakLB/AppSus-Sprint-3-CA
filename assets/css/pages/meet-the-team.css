@@ -1,5 +1,10 @@
 .team-section {
-  height: 87vh;
+  height: 90vh;
+}
+
+.team-section h1{
+  text-align: center;
+  font-size: 28px;
 }
 
 .card {
@@ -7,7 +12,6 @@
   text-align: center;
   width: 320px;
   height: 535px;
-  /* background: url(http://www.riccardotartaglia.it/img/nature.jpg); */
   background-size: cover;
   background: url('../../img/about-bg.jpg');
   background-position: center center;
@@ -15,7 +19,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  margin: auto;
+  margin:0 auto;
   box-shadow: 0px 30px 30px -20px rgba(0, 0, 0, 1),
     inset 0 0 0 1000px rgba(67, 52, 109, 0.6);
   transition: all 0.4s cubic-bezier(0.37, 0.26, 0.35, 1);

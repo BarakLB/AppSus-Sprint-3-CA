@@ -7,7 +7,7 @@ import { TxtLength } from "./TxtLength.jsx"
 
 
 
-export function MailPreview({ mail, toggleStar, onDeleteMail }) {
+export function MailPreview({ mail, toggleStar, onDeleteMail , onMoveToTrash}) {
   
 
     return <section className={(mail.isRead) ? 'mail-preview flex align-center space-between read' :
@@ -30,7 +30,7 @@ export function MailPreview({ mail, toggleStar, onDeleteMail }) {
             </div>
 
         </Link>
-            <button className="delete-btn" onClick={() => onDeleteMail(mail)}><i className="fas fa-trash"></i> </button>
+            <button className="delete-btn" onClick={() => onMoveToTrash(mail.id)}><i className="fas fa-trash"></i> </button>
     </section>
 
 

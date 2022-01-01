@@ -1,5 +1,4 @@
 const { NavLink } = ReactRouterDOM;
-// import { puki } from '../../../../assets/img/puki.svg'
 
 export class MailFolderList extends React.Component {
 

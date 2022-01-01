@@ -8,6 +8,8 @@ export const mailService = {
   updateIsRead,
   starClicked,
   deleteMail,
+  moveToTrash,
+  addMailToArr,
 };
 
 const loggedinUser = {
@@ -16,44 +18,33 @@ const loggedinUser = {
 };
 
 const KEY = 'mailsDB';
-const DELETED_KEY = 'deletedDB';
+
 _createMails();
 
 function query(filterBy = null, sortBy = null) {
   let mails = _loadMailsFromStorage();
-
+  
   if (!filterBy && !sortBy) return Promise.resolve(mails);
-  if (filterBy.status) {
-    mails = _getMailsByFilter(filterBy, mails)
-  }
-  if (sortBy) {
-    mails = getMailsBySort(sortBy)
-  }
-  if (filterBy.txt) {
-    mails = getMailsBySearch(filterBy.txt, mails)
-  }
+  if (filterBy.status) mails = _getMailsByFilter(filterBy, mails)
+  if (sortBy) mails = getMailsBySort(sortBy, mails)
+  if (filterBy.txt) mails = getMailsBySearch(filterBy.txt, mails)
+  
   return Promise.resolve(mails)
 }
 
-function getMailsBySort(sortBy = null) {
-
-  let mails = _loadMailsFromStorage()
-
+function getMailsBySort(sortBy = null, mails) {
   let sortedMails = []
   if (sortBy === 'date') {
     sortedMails = mails.sort((a, b) => {
       return b.sentAt - a.sentAt
     })
-    _SaveMailsToStorage(sortedMails)
-    return sortedMails
   }
   else if (sortBy === 'subject') {
     sortedMails = mails.sort((a, b) => {
       return a.subject.localeCompare(b.subject);
     })
-    _SaveMailsToStorage(sortedMails)
-    return sortedMails
   }
+  return sortedMails
 }
 
 function getMailIdx(mailId) {
@@ -61,8 +52,14 @@ function getMailIdx(mailId) {
   return mails.findIndex(mail => mail.id === mailId)
 }
 
+function addMailToArr(mail){
+let newMail = addMail(mail)
+let mails = _loadMailsFromStorage()
+mails.unshift(newMail)
+_SaveMailsToStorage(mails)
+}
 
-function addMail(subject, body, to) {
+function addMail({subject, to, body}) {
   return {
     id: utilService.makeId(),
     subject,
@@ -87,24 +84,22 @@ function updateIsRead(mail) {
 }
 
 function _getMailsByFilter(filterBy, mails) {
+
   if (!mails) return
   let filteredMails;
   if (!filterBy.status) filterBy.status = 'inbox'
 
-  if (filterBy.status === 'inbox') filteredMails = mails.filter(mail => !mail.isDeleted)
+  if (filterBy.status === 'inbox') filteredMails = mails.filter(mail => mail.from !== loggedinUser.email && !mail.isDeleted)
   if (filterBy.status === 'starred') filteredMails = mails.filter(mail => mail.isStarred)
   if (filterBy.status === 'sent') filteredMails = mails.filter(mail => mail.isSent)
   if (filterBy.status === 'trash') filteredMails = mails.filter(mail => mail.isDeleted)
 
-  // if (filterBy.txt) filteredMails = getMailsBySearch(filterBy.txt, filteredMails)
-  return Promise.resolve(filteredMails)
+  return filteredMails
 
 
 }
 
 function getMailsBySearch(txt, mails) {
-  console.log('txt:', txt);
-
   mails = mails.filter((mail) => {
     return (
       mail.subject.toLowerCase().includes(txt.toLowerCase()) ||
@@ -112,7 +107,6 @@ function getMailsBySearch(txt, mails) {
       mail.nickname.toLowerCase().includes(txt.toLowerCase())
     )
   })
-  console.log('here', mails.filter(mail => mail.subject.includes(txt) && mail.body.includes(txt)))
   return mails
 }
 
@@ -138,16 +132,22 @@ function starClicked(mail) {
 function deleteMail(mailId) {
   let mails = _loadMailsFromStorage()
   const idx = getMailIdx(mailId)
-  let deleted = _loadMailsFromStorage(DELETED_KEY)
-  console.log('deleted:', deleted);
-
   mails[idx].isDeleted = true
-  // deleted.push(mails[idx])
-  mails.splice(idx, 1)
   _SaveMailsToStorage(mails)
-  // _saveDeletedMailsToStorage(deleted)
-  console.log(mails[idx])
   return Promise.resolve()
+}
+
+
+function moveToTrash(mailId) {
+  let mails = _loadMailsFromStorage()
+  const idx = getMailIdx(mailId)
+  if (mails[idx].isDeleted) {
+    deleteMail(mailId);
+    return;
+  }
+  mails[idx].isDeleted = true;
+  _SaveMailsToStorage(mails);
+  return Promise.resolve();
 }
 
 
@@ -205,7 +205,7 @@ function _createMails() {
         sentAt: 1240780664700,
         to: 'orenyan@momo.com',
         from: loggedinUser.email,
-        nickname: 'Puki',
+        nickname: loggedinUser.fullname,
         isStarred: true,
         isSent: true,
         isDeleted: false,
@@ -224,13 +224,37 @@ function _createMails() {
         isSent: false,
         isDeleted: true,
       },
+      {
+        id: utilService.makeId(),
+        subject: 'Hello Puki, push to git!',
+        body: 'Hey Puki Don\'t forget to make a push for your final project'
+          + utilService.makeLorem(),
+        isRead: false,
+        sentAt: 1551133930594,
+        to: loggedinUser.email,
+        from: 'AlonDai@momo.com',
+        nickname: 'Alon-Dai',
+        isStarred: false,
+        isSent: false,
+        isDeleted: false,
+      },
+      {
+        id: utilService.makeId(),
+        subject: '12 new jobs for \'full stack engineer\'',
+        body: `Your job alert for full stack engineer 12 new jobs in Israel match your preferences.
+        Full Stack EngineerQEDMA Quantum Computing · Tel Aviv, Israel (On-site)
+         Actively recruiting`,
+        isRead: false,
+        sentAt: 1551133930594,
+        to: loggedinUser.email,
+        from: 'momo@momo.com',
+        nickname: 'Momo',
+        isStarred: true,
+        isSent: false,
+        isDeleted: false,
+      },
     ];
   }
-  // let deleted = [];
-  // deleted = mails.filter(mail => mail.isDeleted)
-  // mails.filter(mail => !mail.isDeleted)
-  // _saveDeletedMailsToStorage(deleted)
-
   _SaveMailsToStorage(mails);
 }
 
@@ -238,9 +262,6 @@ function _SaveMailsToStorage(mails) {
   storageService.saveToStorage(KEY, mails);
 }
 
-function _saveDeletedMailsToStorage(mails) {
-  storageService.saveToStorage(DELETED_KEY, mails)
-}
 
 function _loadMailsFromStorage(key = KEY) {
   return storageService.loadFromStorage(key);

@@ -2,12 +2,8 @@
 export class MailFilter extends React.Component {
 
     state = {
-
-
         txt: '',
-        // isRead: 'all',
         sortBy: 'date',
-
     }
 
     handleChange = ({ target }) => {
@@ -25,8 +21,6 @@ export class MailFilter extends React.Component {
 
     render() {
         const { txt, sortBy } = this.state;
-    
-     
         return <section className="top-search flex justify-center">
             <div className="search-mail-container flex justify-center ">
                 <label htmlFor="search"><i className="fas fa-search"></i>
@@ -36,12 +30,6 @@ export class MailFilter extends React.Component {
             </div>
 
             <div className="filter-mail-container">
-                {/* <label htmlFor="filter-by"><i className="fas fa-filter"></i> Filter by: </label>
-                <select id="filter-by" name="isRead" value={isRead} onChange={this.handleChange}>
-                    <option value={'all'}>All</option>
-                    <option value={true}>Read</option>
-                    <option value={'false'}>Unread</option> */}
-                {/* </select> */}
                 <label htmlFor="sort-by"><i className="fas fa-sort"></i> Sort by:</label>
                 <select id="sort-by" value={sortBy} name="sortBy" onChange={this.handleChange}>
                     <option value="date">Date</option>

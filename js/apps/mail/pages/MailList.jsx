@@ -7,7 +7,7 @@ import { mailService } from '../services/mail.service.js';
 import { MailPreview } from '../cmps/MailPreview.jsx';
 import { MailFolderList } from '../cmps/MailFolderList.jsx';
 import { MailFilter } from '../cmps/MailFilter.jsx';
-import { Loader } from '../../../cmps/Loader.jsx'
+
 
 export class MailList extends React.Component {
 
@@ -18,7 +18,6 @@ export class MailList extends React.Component {
             txt: '',
         },
         sortBy: 'date',
-        deletedMails: [],
     };
 
     componentDidMount() {
@@ -26,27 +25,26 @@ export class MailList extends React.Component {
     }
 
     loadMails = (filterBy = null, sortBy = null) => {
-        // console.log('in loadmails', filterBy, sortBy)
+        console.log('in loadmails', filterBy, sortBy)
         mailService.query(filterBy, sortBy).then((mails) => {
             this.setState({ mails });
         });
+
     };
 
 
     onFilter = (txt, isRead) => {
-        // console.log('check', txt, isRead)
         this.setState((prevState) => ({ ...prevState, filterBy: { ...prevState.filterBy, txt, isRead } }),
             () => this.loadMails(this.state.filterBy, this.state.sortBy))
     }
 
     onSort = (sortBy) => {
-        console.log(sortBy)
         this.setState((prevState) => ({ ...prevState, sortBy }),
             () => this.loadMails(this.state.filterBy, this.state.sortBy))
     }
 
     toggleStar = (mail) => {
-        mailService.starClicked(mail).then(this.loadMails)
+        mailService.starClicked(mail).then(this.loadMails(this.state.filterBy,this.state.sortBy))
     }
 
 
@@ -60,16 +58,22 @@ export class MailList extends React.Component {
     }
 
     onDeleteMail = (mail) => {
-        let {deletedMails} = this.setState
-        this.setState({deletedMails:mail})
+        console.log(this.state.filterBy)
+        mailService.deleteMail(mail.id).then(() => this.loadMails(this.state.filterBy, this.state.sortBy))
 
     }
 
+    onMoveToTrash = (mailId) => {
+        const idx = this.state.mails.findIndex((mail) => mail.id === mailId);
+        if (this.state.mails[idx].isDeleted) {
+            mailService.deleteMail(mailId).then(() => this.loadMails(this.state.filterBy, this.state.sortBy));
+        } else {
+            mailService.moveToTrash(mailId).then(() => this.loadMails(this.state.filterBy, this.state.sortBy));
+        }
+    };
+
     render() {
         const { mails } = this.state
-        // console.log('state deleted', this.state.deletedMails)
-
-        // if (!this.state.mails.length) return <Loader />
         return (
 
             <section>
@@ -87,7 +91,9 @@ export class MailList extends React.Component {
                         </div>
                         {mails && mails.map((mail) => {
                             return <MailPreview key={mail.id} mail={mail}
-                                toggleStar={this.toggleStar} onDeleteMail={this.onDeleteMail} />
+                                toggleStar={this.toggleStar}
+                                onMoveToTrash={this.onMoveToTrash}
+                                onDeleteMail={this.onDeleteMail} />
                         })}
                     </div>
                 </div >
