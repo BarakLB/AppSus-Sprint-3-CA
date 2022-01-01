@@ -1,6 +1,6 @@
 export function MeetTheTeam() {
     return (
-        <section className="team-section flex">
+        <section className="team-section main-layout flex">
             <div className="card">
                 <div className="avatar avatar1"></div>
                 <div className="profile">
