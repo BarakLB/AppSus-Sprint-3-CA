@@ -8,7 +8,7 @@ export class MailFolderList extends React.Component {
         return <section className="mail-side-nav">
 
             <div className="user-info">
-                <img  alt="" src="../../../../assets/img/puki.png" />
+                <img  alt="" src="/assets/img/puki.png" />
                 <h1>Puki Ben David</h1>
             </div>
             <ul className="side-ul clean-list">

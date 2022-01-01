@@ -25,7 +25,6 @@ export class MailList extends React.Component {
     }
 
     loadMails = (filterBy = null, sortBy = null) => {
-        console.log('in loadmails', filterBy, sortBy)
         mailService.query(filterBy, sortBy).then((mails) => {
             this.setState({ mails });
         });
