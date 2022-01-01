@@ -21,3 +21,12 @@
     background-color: transparent;
     font-size: 25px;
 }
+
+.read {
+    background-color: #6998AB;
+}
+
+.delete-btn {
+    background: none;
+    font-size: 22px;
+}

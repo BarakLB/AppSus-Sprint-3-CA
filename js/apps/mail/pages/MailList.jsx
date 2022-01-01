@@ -16,7 +16,6 @@ export class MailList extends React.Component {
         filterBy: {
             status: 'inbox',
             txt: '',
-            isRead: '',
         },
         sortBy: 'date',
         deletedMails: [],
@@ -27,7 +26,7 @@ export class MailList extends React.Component {
     }
 
     loadMails = (filterBy = null, sortBy = null) => {
-        console.log('in loadmails', filterBy, sortBy)
+        // console.log('in loadmails', filterBy, sortBy)
         mailService.query(filterBy, sortBy).then((mails) => {
             this.setState({ mails });
         });
@@ -35,7 +34,7 @@ export class MailList extends React.Component {
 
 
     onFilter = (txt, isRead) => {
-        console.log('check', txt, isRead)
+        // console.log('check', txt, isRead)
         this.setState((prevState) => ({ ...prevState, filterBy: { ...prevState.filterBy, txt, isRead } }),
             () => this.loadMails(this.state.filterBy, this.state.sortBy))
     }
@@ -60,9 +59,15 @@ export class MailList extends React.Component {
         this.setState({ sortBy: value })
     }
 
+    onDeleteMail = (mail) => {
+        let {deletedMails} = this.setState
+        this.setState({deletedMails:mail})
+
+    }
+
     render() {
-        const { mails, filterBy } = this.state
-        console.log(this.state, 'maillist state')
+        const { mails } = this.state
+        // console.log('state deleted', this.state.deletedMails)
 
         // if (!this.state.mails.length) return <Loader />
         return (
@@ -74,14 +79,15 @@ export class MailList extends React.Component {
 
                     <MailFolderList onSetFoldersFilter={this.onSetFoldersFilter} />
                     <div className="mails-preview-container">
-                        <div className="mail-list-headers flex space-between">
+                        <div className="mail-list-headers flex space-around">
                             <h3>Name</h3>
                             <h3>Subject</h3>
                             <h3>Mail body</h3>
                             <h3>Date</h3>
                         </div>
                         {mails && mails.map((mail) => {
-                            return <MailPreview key={mail.id} mail={mail} toggleStar={this.toggleStar} />
+                            return <MailPreview key={mail.id} mail={mail}
+                                toggleStar={this.toggleStar} onDeleteMail={this.onDeleteMail} />
                         })}
                     </div>
                 </div >

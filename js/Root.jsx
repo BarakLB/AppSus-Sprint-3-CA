@@ -2,6 +2,7 @@
 import { Home } from './pages/Home.jsx';
 import { MailApp } from './apps/mail/MailApp.jsx';
 import { NoteApp } from './apps/keep/NoteApp.jsx';
+import { MeetTheTeam } from './pages/MeetTheTeam.jsx';
 
 //CMPS
 import { AppHeader } from './cmps/AppHeader.jsx';
@@ -18,6 +19,7 @@ export function App() {
         <AppHeader />
         <main className="main-app">
           <Switch>
+            <Route component={MeetTheTeam} path="/about"></Route>
             <Route component={NoteApp} path="/note"></Route>
             <Route component={MailApp} path="/mail"></Route>
             <Route component={Home} path="/"></Route>

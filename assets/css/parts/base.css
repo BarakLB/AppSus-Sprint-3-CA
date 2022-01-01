@@ -6,8 +6,13 @@ body {
     margin: 0;
     padding: 0;
     font-family: poppins-regular;
-    background-color: #222831;
+    /* background-color: #222831; */
+    /* height: 100vh; */
     color: #EEEEEE;
+    background: rgb(34,40,49);
+    background: linear-gradient(162deg, rgba(34,40,49,1) 0%, rgba(144,184,248,1) 100%);
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 
 p {

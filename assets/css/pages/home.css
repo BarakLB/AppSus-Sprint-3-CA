@@ -6,7 +6,7 @@
      align-items: center;
      justify-content: center;
      width: 100%;
-     height: 80vh;
+     height: 87vh;
      top: 0;
      left: 0;
      right: 0;
@@ -26,7 +26,8 @@
   .go-to-btn {
     background-color: #22283193;
     padding: 8px;
+    transition: all 0.3s;
   }
   .go-to-btn:hover {
-    background-color: #6a7f6a;
+    background-color: #5f85db;
   }

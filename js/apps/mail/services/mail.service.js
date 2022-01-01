@@ -20,26 +20,25 @@ const DELETED_KEY = 'deletedDB';
 _createMails();
 
 function query(filterBy = null, sortBy = null) {
-
-
   let mails = _loadMailsFromStorage();
 
-  // console.log('querymails', mails);
-
   if (!filterBy && !sortBy) return Promise.resolve(mails);
-  if (filterBy) {
+  if (filterBy.status) {
     mails = _getMailsByFilter(filterBy, mails)
   }
   if (sortBy) {
     mails = getMailsBySort(sortBy)
   }
+  if (filterBy.txt) {
+    mails = getMailsBySearch(filterBy.txt, mails)
+  }
   return Promise.resolve(mails)
 }
 
-// getMailsBySort('subject')
 function getMailsBySort(sortBy = null) {
 
   let mails = _loadMailsFromStorage()
+
   let sortedMails = []
   if (sortBy === 'date') {
     sortedMails = mails.sort((a, b) => {
@@ -52,8 +51,7 @@ function getMailsBySort(sortBy = null) {
     sortedMails = mails.sort((a, b) => {
       return a.subject.localeCompare(b.subject);
     })
-    // _SaveMailsToStorage(sortedMails)
-    // console.log('mails after:', sortedMails);
+    _SaveMailsToStorage(sortedMails)
     return sortedMails
   }
 }
@@ -63,6 +61,22 @@ function getMailIdx(mailId) {
   return mails.findIndex(mail => mail.id === mailId)
 }
 
+
+function addMail(subject, body, to) {
+  return {
+    id: utilService.makeId(),
+    subject,
+    body,
+    isRead: false,
+    sentAt: Date.now(),
+    to,
+    from: loggedinUser.email,
+    nickname: loggedinUser.fullname,
+    isStarred: false,
+    isSent: true,
+    isDeleted: false,
+  }
+}
 
 
 function updateIsRead(mail) {
@@ -74,40 +88,33 @@ function updateIsRead(mail) {
 
 function _getMailsByFilter(filterBy, mails) {
   if (!mails) return
-  let filteredMails = []
-  let deleted = []
+  let filteredMails;
   if (!filterBy.status) filterBy.status = 'inbox'
-  console.log('filterBy:', filterBy);
 
-
-  if (filterBy.status === 'inbox') {
-    deleted = mails.filter(mail => mail.isDeleted)
-    _saveDeletedMailsToStorage(deleted)
-    console.log('deleted:', deleted);
-
-    filteredMails = mails.filter(mail => !mail.isDeleted)
-  }
+  if (filterBy.status === 'inbox') filteredMails = mails.filter(mail => !mail.isDeleted)
   if (filterBy.status === 'starred') filteredMails = mails.filter(mail => mail.isStarred)
   if (filterBy.status === 'sent') filteredMails = mails.filter(mail => mail.isSent)
-  if (filterBy.status === 'trash') {
-    deleted = _loadMailsFromStorage(DELETED_KEY)
-    _saveDeletedMailsToStorage(deleted)
-    filteredMails = deleted
-  }
+  if (filterBy.status === 'trash') filteredMails = mails.filter(mail => mail.isDeleted)
 
-  if (filterBy.isRead === 'true') filteredMails = mails.filter(mail => mail.isRead && !mail.isDeleted)
-  if (filterBy.isRead === 'false') filteredMails = mails.filter(mail => !mail.isRead && !mail.isDeleted)
-  if (filterBy.isRead === 'all') filteredMails = mails
-  console.log('filteredMails:', filteredMails);
-  console.log('deleted:', deleted);
-
-  _SaveMailsToStorage(filteredMails)
+  // if (filterBy.txt) filteredMails = getMailsBySearch(filterBy.txt, filteredMails)
   return Promise.resolve(filteredMails)
-  // return null
+
 
 }
 
+function getMailsBySearch(txt, mails) {
+  console.log('txt:', txt);
 
+  mails = mails.filter((mail) => {
+    return (
+      mail.subject.toLowerCase().includes(txt.toLowerCase()) ||
+      mail.body.toLowerCase().includes(txt.toLowerCase()) ||
+      mail.nickname.toLowerCase().includes(txt.toLowerCase())
+    )
+  })
+  console.log('here', mails.filter(mail => mail.subject.includes(txt) && mail.body.includes(txt)))
+  return mails
+}
 
 
 function getUser() {
@@ -131,16 +138,16 @@ function starClicked(mail) {
 function deleteMail(mailId) {
   let mails = _loadMailsFromStorage()
   const idx = getMailIdx(mailId)
- let deleted = _loadMailsFromStorage(DELETED_KEY)
- console.log('deleted:', deleted);
- 
+  let deleted = _loadMailsFromStorage(DELETED_KEY)
+  console.log('deleted:', deleted);
+
   mails[idx].isDeleted = true
-  deleted.push(mails[idx])
-  mails.filter(mail => !mail.isDeleted)
+  // deleted.push(mails[idx])
+  mails.splice(idx, 1)
   _SaveMailsToStorage(mails)
-  _saveDeletedMailsToStorage(deleted)
- console.log(mails[idx])
-  
+  // _saveDeletedMailsToStorage(deleted)
+  console.log(mails[idx])
+  return Promise.resolve()
 }
 
 
@@ -152,7 +159,8 @@ function _createMails() {
       {
         id: utilService.makeId(),
         subject: 'Hello Puki!',
-        body: 'Hey, man! I missed you so much! I just learned React and I hope you enjoy in Coding Academy Course',
+        body: 'Hey, man! I missed you so much! I just learned React and I hope you enjoy in Coding Academy Course'
+          + utilService.makeLorem(),
         isRead: false,
         sentAt: 1551133930594,
         to: loggedinUser.email,
@@ -165,7 +173,8 @@ function _createMails() {
       {
         id: utilService.makeId(),
         subject: 'Daniel Shaked invited you to DanielShaked test1',
-        body: '@DanielShaked has invited you to collaborate on the DanielShaked/test1 repository',
+        body: '@DanielShaked has invited you to collaborate on the DanielShaked/test1 repository '
+          + utilService.makeLorem(),
         isRead: true,
         sentAt: 1640948987611,
         to: loggedinUser.email,
@@ -178,7 +187,7 @@ function _createMails() {
       {
         id: utilService.makeId(),
         subject: '[Slack] New message from Oren Yaniv',
-        body: 'Yo Puki, good job with your last project!',
+        body: 'Yo Puki, good job with your last project! ' + utilService.makeLorem(),
         isRead: false,
         sentAt: 1640780664700,
         to: loggedinUser.email,
@@ -191,7 +200,7 @@ function _createMails() {
       {
         id: utilService.makeId(),
         subject: 'Oren, I need a little help with my react application',
-        body: 'Hello Oren, Can you please help me fix some bugs in my app? cant make it on my own, Puki',
+        body: 'Hello Oren, Can you please help me fix some bugs in my app? cant make it on my own, Puki ' + utilService.makeLorem(),
         isRead: false,
         sentAt: 1240780664700,
         to: 'orenyan@momo.com',
@@ -205,7 +214,7 @@ function _createMails() {
       {
         id: utilService.makeId(),
         subject: 'Find what\'s new in AliExpress',
-        body: 'Hello Puki, Come and check what\'s new in the latest categories you visited',
+        body: 'Hello Puki, Come and check what\'s new in the latest categories you visited ' + utilService.makeLorem(),
         isRead: true,
         sentAt: 1240780664700,
         to: 'orenyan@momo.com',

@@ -7,10 +7,12 @@ import { TxtLength } from "./TxtLength.jsx"
 
 
 
-export function MailPreview({ mail, toggleStar }) {
-    // let clicked;
-    // (mail.isStarred) ? 'clicked' : ''
-    return <section className="mail-preview flex align-center space-between" >
+export function MailPreview({ mail, toggleStar, onDeleteMail }) {
+  
+
+    return <section className={(mail.isRead) ? 'mail-preview flex align-center space-between read' :
+     'mail-preview flex align-center space-between'}>
+   
 
 
             <button className="star-btn" onClick={() => toggleStar(mail)}>
@@ -28,7 +30,7 @@ export function MailPreview({ mail, toggleStar }) {
             </div>
 
         </Link>
-            <button onClick={() => mailService.deleteMail(mail.id)}><i className="fas fa-trash"></i> </button>
+            <button className="delete-btn" onClick={() => onDeleteMail(mail)}><i className="fas fa-trash"></i> </button>
     </section>
 
 

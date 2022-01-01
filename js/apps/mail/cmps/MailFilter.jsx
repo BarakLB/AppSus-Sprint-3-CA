@@ -5,7 +5,7 @@ export class MailFilter extends React.Component {
 
 
         txt: '',
-        isRead: 'all',
+        // isRead: 'all',
         sortBy: 'date',
 
     }
@@ -14,9 +14,8 @@ export class MailFilter extends React.Component {
         const field = target.name;
         const value = target.value;
         this.setState((prevState) => ({ ...prevState, [field]: value }), () => {
-            console.log(this.state)
-            const { txt, isRead, sortBy } = this.state;
-            this.props.onFilter(txt, isRead);
+            const { txt, sortBy } = this.state;
+            this.props.onFilter(txt);
             this.props.onSort(sortBy);
         }
         );
@@ -25,7 +24,7 @@ export class MailFilter extends React.Component {
 
 
     render() {
-        const { txt, isRead, sortBy } = this.state;
+        const { txt, sortBy } = this.state;
     
      
         return <section className="top-search flex justify-center">
@@ -37,12 +36,12 @@ export class MailFilter extends React.Component {
             </div>
 
             <div className="filter-mail-container">
-                <label htmlFor="filter-by"><i className="fas fa-filter"></i> Filter by: </label>
+                {/* <label htmlFor="filter-by"><i className="fas fa-filter"></i> Filter by: </label>
                 <select id="filter-by" name="isRead" value={isRead} onChange={this.handleChange}>
                     <option value={'all'}>All</option>
                     <option value={true}>Read</option>
-                    <option value={'false'}>Unread</option>
-                </select>
+                    <option value={'false'}>Unread</option> */}
+                {/* </select> */}
                 <label htmlFor="sort-by"><i className="fas fa-sort"></i> Sort by:</label>
                 <select id="sort-by" value={sortBy} name="sortBy" onChange={this.handleChange}>
                     <option value="date">Date</option>

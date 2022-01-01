@@ -1,0 +1,27 @@
+.mail-details {
+  text-align: center;
+  padding: 30px 50px 0 50px;
+}
+
+.mail-details-container {
+  text-align: left;
+}
+.mail-details-container p {
+  margin-top: 50px;
+}
+
+.back-to-mails {
+  font-size: 20px;
+  background-color: #90b8f8;
+  color: #26282b;
+  padding: 10px;
+  width: 200px;
+  margin: 0 auto;
+  transition: all 300ms;
+}
+
+.back-to-mails:hover {
+  background-color: #5f85db;
+  color: #eeeeee;
+  /* margin-bottom: 50px; */
+}

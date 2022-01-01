@@ -28,15 +28,14 @@ export class EmailDetails extends React.Component {
         const { mail } = this.state
         
         if (!mail) return <Loader />
-        return <section className="mail-details">
+        return <section className="mail-details flex direction-column">
 
-            <Link className="clean-link" to="/mail">  <i className="fas fa-envelope-open-text"></i>Back to mails</Link>
-            <button>  <i className="fas fa-trash"></i>Move to trash</button>
+            <Link className="clean-link back-to-mails" to="/mail">  <i className="fas fa-envelope-open-text"></i> Back to Email</Link>
             <div className="mail-details-container">
-                <h3>Sent At: {utilService.handleTimestamp(mail.sentAt)}</h3>
-                <h4>From: {mail.nickname}, {mail.from}</h4>
                 <h1>{mail.subject}</h1>
+                <h4>From: {mail.nickname}, {mail.from}</h4>
                 <p>{mail.body}</p>
+                <h3>Sent At: {utilService.handleTimestamp(mail.sentAt)}</h3>
             </div>
         </section>
     }

@@ -1,5 +1,11 @@
 export class MailCompose extends React.Component {
 
+    handleChange = ({ target }) => {
+        const field = target.name;
+        const value = target.value;
+     
+    };
+
     render() {
         return <section className="new-mail">
             <form className="new-mail-form flex direction-column">
