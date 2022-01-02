@@ -158,7 +158,7 @@ function _createMails() {
     mails = [
       {
         id: utilService.makeId(),
-        subject: 'Hello Puki!',
+        subject: 'Dear Puki Ben David!',
         body: 'Hey, man! I missed you so much! I just learned React and I hope you enjoy in Coding Academy Course'
           + utilService.makeLorem(),
         isRead: false,
@@ -216,7 +216,7 @@ function _createMails() {
         subject: 'Find what\'s new in AliExpress',
         body: 'Hello Puki, Come and check what\'s new in the latest categories you visited ' + utilService.makeLorem(),
         isRead: true,
-        sentAt: 1240780664700,
+        sentAt: 1470780664700,
         to: 'orenyan@momo.com',
         from: 'AliExpress@momo.com',
         nickname: 'AliExpress',
@@ -230,7 +230,7 @@ function _createMails() {
         body: 'Hey Puki Don\'t forget to make a push for your final project'
           + utilService.makeLorem(),
         isRead: false,
-        sentAt: 1551133930594,
+        sentAt: 1440780664700,
         to: loggedinUser.email,
         from: 'AlonDai@momo.com',
         nickname: 'Alon-Dai',
@@ -245,10 +245,10 @@ function _createMails() {
         Full Stack EngineerQEDMA Quantum Computing · Tel Aviv, Israel (On-site)
          Actively recruiting`,
         isRead: false,
-        sentAt: 1551133930594,
+        sentAt: 1641102286489,
         to: loggedinUser.email,
-        from: 'momo@momo.com',
-        nickname: 'Momo',
+        from: 'shuki@momo.com',
+        nickname: 'Shuki',
         isStarred: true,
         isSent: false,
         isDeleted: false,

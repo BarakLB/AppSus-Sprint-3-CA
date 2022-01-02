@@ -22,6 +22,7 @@ export function MailPreview({ mail, toggleStar, onDeleteMail , onMoveToTrash}) {
             <div className="sender-name">
                 <p>{mail.nickname}</p>
             </div>
+            <div></div>
             <TxtLength text={mail.subject} />
             <TxtLength text={mail.body} />
             <div className="sent-at">

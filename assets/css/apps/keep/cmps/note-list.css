@@ -3,7 +3,9 @@
     column-span: all;
     column-gap: 50px;
     /* display: grid;
-    grid-template-columns: repeat(3, 1fr); */
+    /* grid-template-columns: repeat(3, 1fr); */ 
+    /* display: flex; */
+    /* flex-direction: column; */
     color: #1d1c1c;
 }
 

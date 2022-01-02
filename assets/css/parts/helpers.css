@@ -30,6 +30,12 @@
 .fa-star.clicked {
   color: gold;
 }
+.fa-star {
+  color: #26282b;
+}
+.fa-trash {
+  color: #26282b;
+}
 
 .pointer {
   cursor: pointer;
@@ -58,3 +64,5 @@
   max-width: 980px;
   margin: 0 auto;
 }
+
+
